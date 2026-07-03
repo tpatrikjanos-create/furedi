@@ -38,6 +38,69 @@
   a{color:inherit;}
   ::selection{background:var(--yolk); color:var(--ink);}
 
+  .topnav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(43,36,32,0.92);
+    backdrop-filter:blur(10px) saturate(1.2);
+    -webkit-backdrop-filter:blur(10px) saturate(1.2);
+    border-bottom:1px solid rgba(251,246,236,0.1);
+  }
+  .topnav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    padding:12px 20px;
+  }
+  .topnav-brand{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-style:italic;
+    font-size:16px;
+    color:var(--cream);
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .topnav-brand span{color:var(--yolk);}
+  .topnav-links{
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+  }
+  .topnav-links a{
+    color:rgba(251,246,236,0.72);
+    text-decoration:none;
+    font-size:13.5px;
+    font-weight:500;
+    transition:color 0.15s ease;
+    white-space:nowrap;
+  }
+  .topnav-links a:hover{color:var(--yolk);}
+  .topnav-call{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    color:var(--cream);
+    text-decoration:none;
+    font-family:'Space Mono', monospace;
+    font-size:13px;
+    font-weight:700;
+    background:var(--paprika);
+    padding:9px 16px;
+    border-radius:999px;
+    white-space:nowrap;
+    transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    box-shadow:0 4px 12px rgba(179,58,46,0.35);
+  }
+  .topnav-call svg{width:14px; height:14px; flex-shrink:0;}
+  .topnav-call:hover{background:#a3341f; transform:translateY(-1px); box-shadow:0 6px 16px rgba(179,58,46,0.45);}
+  @media (max-width:760px){
+    .topnav-links{display:none;}
+    .topnav-brand{font-size:15px;}
+  }
+
   .wrap{
     max-width:960px;
     margin:0 auto;
@@ -112,13 +175,13 @@
     background:var(--paper);
     background-image:var(--grain);
     border:1px solid rgba(43,36,32,0.28);
-    border-radius:4px;
+    border-radius:14px;
     padding:48px 44px 38px;
     text-align:center;
     max-width:640px;
     box-shadow:
       0 1px 0 rgba(255,255,255,0.5) inset,
-      0 26px 46px rgba(0,0,0,0.32);
+      0 30px 60px rgba(0,0,0,0.36);
     position:relative;
   }
   .board::before{
@@ -253,16 +316,20 @@
     font-family:'Work Sans',sans-serif;
     font-weight:600;
     font-size:14px;
-    padding:12px 22px;
-    border-radius:4px;
+    padding:12px 24px;
+    border-radius:999px;
     text-decoration:none;
     border:1.5px solid transparent;
     transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
   }
   .btn:focus-visible{outline:3px solid var(--yolk); outline-offset:2px;}
   .btn:hover{transform:translateY(-2px);}
-  .btn-primary{background:var(--paprika); color:var(--cream);}
-  .btn-primary:hover{box-shadow:0 8px 16px rgba(179,58,46,0.4); background:#a3341f;}
+  .btn-primary{
+    background:linear-gradient(135deg, var(--paprika), #a3341f);
+    color:var(--cream);
+    box-shadow:0 6px 14px rgba(179,58,46,0.32);
+  }
+  .btn-primary:hover{box-shadow:0 10px 22px rgba(179,58,46,0.45); background:linear-gradient(135deg, #c04532, #93301c);}
   .btn-ghost{background:transparent; border-color:var(--ink); color:var(--ink);}
   .btn-ghost:hover{background:rgba(43,36,32,0.06);}
 
@@ -413,10 +480,10 @@
   .menu-panels{
     background:var(--paper);
     background-image:var(--grain);
-    border-radius:10px;
+    border-radius:16px;
     max-width:720px;
     margin:0 auto;
-    box-shadow:0 24px 48px rgba(0,0,0,0.28);
+    box-shadow:0 28px 56px rgba(0,0,0,0.3);
     overflow:hidden;
   }
   .panel{
@@ -623,13 +690,13 @@
     background:var(--paper);
     background-image:var(--grain);
     border:1px solid var(--line);
-    border-radius:8px;
+    border-radius:14px;
     padding:28px;
     transition:box-shadow 0.2s ease, transform 0.2s ease;
   }
   .card:hover{
-    box-shadow:0 10px 24px rgba(43,36,32,0.1);
-    transform:translateY(-2px);
+    box-shadow:0 14px 30px rgba(43,36,32,0.12);
+    transform:translateY(-3px);
   }
 
   .card h2{
@@ -842,7 +909,23 @@
 </head>
 <body>
 
-<div class="hero-stage">
+<div class="topnav" id="topnav">
+  <div class="wrap topnav-inner">
+    <a class="topnav-brand" href="#top">Füredi <span>Kifőzde</span></a>
+    <nav class="topnav-links">
+      <a href="#heti-menu">Heti menü</a>
+      <a href="#rendezvenyekre">Rendezvények</a>
+      <a href="#velemenyek">Vélemények</a>
+      <a href="#elerhetoseg">Elérhetőség</a>
+    </nav>
+    <a class="topnav-call" href="tel:+36206102528">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      06 20 610 2528
+    </a>
+  </div>
+</div>
+
+<div class="hero-stage" id="top">
   <div class="sign-hook reveal">
     <div class="hook-bolt"></div>
     <div class="chain"></div>
@@ -1015,7 +1098,7 @@
     </div>
   </section>
 
-  <section class="catering">
+  <section class="catering" id="rendezvenyekre">
     <div class="wrap">
       <div class="catering-grid">
         <div class="catering-text reveal">
@@ -1041,7 +1124,7 @@
     </div>
   </section>
 
-  <div class="wrap">
+  <div class="wrap" id="elerhetoseg">
     <div class="grid-two">
       <div class="card reveal">
         <h2>
